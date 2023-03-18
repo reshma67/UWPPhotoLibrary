@@ -7,8 +7,32 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+  
 
     <Grid>
-
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="7.5*"/>
+            <RowDefinition Height="1.5*"/>
+        </Grid.RowDefinitions>
+        <Border Grid.Row="0" Background="#7F7F7F">
+            <TextBlock Text="Header" FontSize="24" Padding="10"/>
+        </Border>
+        <Border Grid.Row="1" Background="White">
+            <TextBlock Text="Content" FontSize="18" Padding="10"/>
+        </Border>
+        <Border Grid.Row="2" Background="#7F7F7F">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <Button  Margin="10,0,0,0" Background="#7F7F7F" ToolTipService.ToolTip ="Click to view the collection of favorites" >
+                    <Image Source="/Assets/Buttons/heartbutton.png" Width="50" Height="50" Opacity="0.5"/>
+                </Button>
+                <Button Margin="10,0,0,0" Background="#7F7F7F" ToolTipService.ToolTip ="Click to add photo to gallery">
+                    <Image Source="/Assets/Buttons/plusbutton.png" Width="50" Height="50" Opacity="0.5" />
+                </Button>
+                <Button Margin="10,0,0,0"  Background="#7F7F7F" ToolTipService.ToolTip ="Click here edit the cover photo, profile photo and description" >
+                    <Image Source="/Assets/Buttons/pencilbutton.png" Width="50" Height="50" Opacity="0.5" />
+                </Button>
+            </StackPanel>
+        </Border>
     </Grid>
 </Page>
