@@ -12,7 +12,8 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="1*"/>
-            <RowDefinition Height="7.5*"/>
+            <RowDefinition Height="2.5*"/>
+            <RowDefinition Height="5*"/>
             <RowDefinition Height="1.5*"/>
         </Grid.RowDefinitions>
         <Border Grid.Row="0" Background="#7F7F7F">
@@ -21,9 +22,12 @@
             </StackPanel>
         </Border>
         <Border Grid.Row="1" Background="White">
-            <TextBlock Text="Content" FontSize="18" Padding="10"/>
+            <Image Source="Assets/Images/default-cover-photo.png" Stretch="UniformToFill" />
         </Border>
-        <Border Grid.Row="2" Background="#7F7F7F">
+        <Border Grid.Row="2" Background="White">
+            <TextBlock Text="Photo Grid" FontSize="18" Padding="10"/>
+        </Border>
+        <Border Grid.Row="3" Background="#7F7F7F">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
                 <Button  Margin="10,0,0,0" Background="#7F7F7F" ToolTipService.ToolTip ="Click to view the collection of favorites" >
                     <Image Source="/Assets/Buttons/heartbutton.png" Width="50" Height="50" Opacity="0.5"/>
