@@ -133,6 +133,9 @@
     <Content Include="Assets\Buttons\heartbutton.png" />
     <Content Include="Assets\Buttons\pencilbutton.png" />
     <Content Include="Assets\Buttons\plusbutton.png" />
+    <Content Include="Assets\Images\default-cover-photo.png" />
+    <Content Include="Assets\Images\default-profile-image.png" />
+    <Content Include="Assets\Images\logo.png" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />
     <Content Include="Assets\SplashScreen.scale-200.png" />

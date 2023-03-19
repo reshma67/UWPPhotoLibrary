@@ -16,7 +16,9 @@
             <RowDefinition Height="1.5*"/>
         </Grid.RowDefinitions>
         <Border Grid.Row="0" Background="#7F7F7F">
-            <TextBlock Text="Header" FontSize="24" Padding="10"/>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <Image Width="100" VerticalAlignment="Center" HorizontalAlignment="Center" Source="Assets/Images/logo.png" />
+            </StackPanel>
         </Border>
         <Border Grid.Row="1" Background="White">
             <TextBlock Text="Content" FontSize="18" Padding="10"/>
