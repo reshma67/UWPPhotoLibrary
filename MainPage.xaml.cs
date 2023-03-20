@@ -36,7 +36,8 @@ namespace UWPPhotoLibrary
             fixedphotos = new ObservableCollection<Photo>();
             photos = new ObservableCollection<Photo>();
             favphotos = new ObservableCollection<Photo>();
-            PhotoManager.GetPhotos(photos);
+            //PhotoManager.GetPhotos(photos);
+            PhotoManager.GetPhotosFromAssets(photos);
         }
 
         private void PhotoView_ItemClick(object sender, ItemClickEventArgs e)

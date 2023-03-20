@@ -139,6 +139,21 @@
     <Content Include="Assets\Images\default-cover-photo.png" />
     <Content Include="Assets\Images\default-profile-image.png" />
     <Content Include="Assets\Images\logo.png" />
+    <Content Include="Assets\Images\Photos\abstract-2023235_960_720.png" />
+    <Content Include="Assets\Images\Photos\alcoholic-drinks-7356721_960_720.png" />
+    <Content Include="Assets\Images\Photos\bike-7342379_960_720.png" />
+    <Content Include="Assets\Images\Photos\bush-6963528_960_720.png" />
+    <Content Include="Assets\Images\Photos\christmas-5740350_960_720.png" />
+    <Content Include="Assets\Images\Photos\christmas-6809681_960_720.png" />
+    <Content Include="Assets\Images\Photos\chrysanthemum-7290238_960_720.png" />
+    <Content Include="Assets\Images\Photos\coffee-5009730_960_720.png" />
+    <Content Include="Assets\Images\Photos\hut-6968718_960_720.png" />
+    <Content Include="Assets\Images\Photos\leaves-7552915_960_720.png" />
+    <Content Include="Assets\Images\Photos\peace-7063559_960_720.png" />
+    <Content Include="Assets\Images\Photos\plant-7413415_960_720.png" />
+    <Content Include="Assets\Images\Photos\seat-7354939_960_720.png" />
+    <Content Include="Assets\Images\Photos\watercolor-6475471_960_720.png" />
+    <Content Include="Assets\Images\Photos\woman-6289052_960_720.png" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />
     <Content Include="Assets\SplashScreen.scale-200.png" />
@@ -161,6 +176,9 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform">
       <Version>6.2.14</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Xaml.Behaviors.Uwp.Managed">
+      <Version>2.0.1</Version>
     </PackageReference>
     <PackageReference Include="System.Drawing.Common">
       <Version>7.0.0</Version>
