@@ -18,12 +18,19 @@
         </Grid.RowDefinitions>
         <Border Grid.Row="0" Background="#7F7F7F">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-                <Image Width="100" VerticalAlignment="Center" HorizontalAlignment="Center" Source="Assets/Images/logo.png" />
+                <Image Width="100" VerticalAlignment="Center" HorizontalAlignment="Center" Source="Assets/Images/Brand-Images/logo.png" />
             </StackPanel>
         </Border>
-        <Border Grid.Row="1" Background="White">
-            <Image Source="Assets/Images/default-cover-photo.png" Stretch="UniformToFill" />
-        </Border>
+        <!-- Cover Image needs to stretch across section, 
+        and a circular profile photo must stack over cover photo in bottom, center alignment-->
+        <Image Grid.Row="1" Source="Assets/Images/Cover-Images/default-cover-image.jpg" Stretch="UniformToFill"/>
+        <Grid Grid.Row="1" x:Name="SingleImageContainer">
+            <Ellipse Height="150" Width="150">
+                <Ellipse.Fill>
+                    <ImageBrush ImageSource="Assets/Images/Profile-Images/default-profile-image.png" AlignmentX="Center" AlignmentY="Bottom" />
+                </Ellipse.Fill>
+            </Ellipse>
+        </Grid>
         <Border Grid.Row="2" Background="White">
             <TextBlock Text="Photo Grid" FontSize="18" Padding="10"/>
         </Border>
