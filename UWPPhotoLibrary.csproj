@@ -122,6 +122,8 @@
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Models\Photo.cs" />
+    <Compile Include="Models\PhotoManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -131,6 +133,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets\Buttons\heartbutton.png" />
+    <Content Include="Assets\Buttons\homebutton.PNG" />
     <Content Include="Assets\Buttons\pencilbutton.png" />
     <Content Include="Assets\Buttons\plusbutton.png" />
     <Content Include="Assets\Images\default-cover-photo.png" />
