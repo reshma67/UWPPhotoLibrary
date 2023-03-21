@@ -18,9 +18,6 @@ using Windows.UI.Xaml.Navigation;
 using UWPPhotoLibrary.Models;
 using System.Diagnostics;
 
-
-// The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
-
 namespace UWPPhotoLibrary
 {
     /// <summary>
@@ -58,7 +55,7 @@ namespace UWPPhotoLibrary
             if(checkBox.IsChecked == true)
             {
                 photo.IsFavorite = true;
-                File.WriteAllText(photo.ObjectPath, "true");
+                File.WriteAllText(photo.ObjectStateLocation, "true");
             }
         }
 
@@ -85,7 +82,7 @@ namespace UWPPhotoLibrary
             photo.IsFavorite = false;
             try
             {
-                File.WriteAllText(photo.ObjectPath, "false");
+                File.WriteAllText(photo.ObjectStateLocation, "false");
             }
             catch (Exception ex)
             {

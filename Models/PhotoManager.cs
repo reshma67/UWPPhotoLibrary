@@ -20,26 +20,24 @@ namespace UWPPhotoLibrary.Models
         {
             photos.Clear();
             StorageFolder localFolder = ApplicationData.Current.LocalFolder;
-            StorageFolder myFolder = await localFolder.CreateFolderAsync("MyFolder", CreationCollisionOption.OpenIfExists);
-            IReadOnlyList<StorageFile> fileList = await myFolder.GetFilesAsync();
+            StorageFolder myPhotos = await localFolder.CreateFolderAsync("MyPhotos", CreationCollisionOption.OpenIfExists);
+            IReadOnlyList<StorageFile> fileList = await myPhotos.GetFilesAsync();
             foreach (var file in fileList)
             {
-                var name = file.DisplayName;
-                var path = file.Path;
-                var objectPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), $"{name}.txt");
-                if (File.Exists(objectPath))
+                var objectStateLocation = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), $"{file.DisplayName}.txt");
+                if (File.Exists(objectStateLocation))
                 {
-                    string fileContents = File.ReadAllText(objectPath);
-                    var photo = new Photo(name, path,bool.Parse(fileContents));
+                    string isChecked = File.ReadAllText(objectStateLocation);
+                    var photo = new Photo(file.DisplayName, file.Path,bool.Parse(isChecked));
                     photos.Add(photo);
-                    photo.ObjectPath = objectPath;
+                    photo.ObjectStateLocation = objectStateLocation;
                 }
                 else
                 {
-                    var photo = new Photo(name, path, false);
+                    var photo = new Photo(file.DisplayName, file.Path, false);
                     photos.Add(photo);
-                    photo.ObjectPath = objectPath;
-                    File.WriteAllText(photo.ObjectPath, "false");
+                    photo.ObjectStateLocation = objectStateLocation;
+                    File.WriteAllText(photo.ObjectStateLocation, "false");
                 }
 
             }
@@ -82,16 +80,14 @@ AddPhotos(ObservableCollection<Photo> photos)
                 }
                 if (flag == false)
                 {
-                    var name = file.DisplayName;
-                    var path = file.Path;
-                    var objectPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), $"{name}.txt");
-                    var photo = new Photo(name, path, false);
+                    var objectStateLocation = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), $"{file.DisplayName}.txt");
+                    var photo = new Photo(file.DisplayName,file.Path, false);
                     photos.Add(photo);
-                    photo.ObjectPath = objectPath;
-                    File.WriteAllText(photo.ObjectPath, "false");
+                    photo.ObjectStateLocation = objectStateLocation;
+                    File.WriteAllText(photo.ObjectStateLocation, "false");
                     StorageFolder localFolder = ApplicationData.Current.LocalFolder;
-                    StorageFolder myFolder = await localFolder.CreateFolderAsync("MyFolder", CreationCollisionOption.OpenIfExists);
-                    await file.CopyAsync(myFolder, file.Name, NameCollisionOption.ReplaceExisting);
+                    StorageFolder myPhotos = await localFolder.CreateFolderAsync("MyPhotos", CreationCollisionOption.OpenIfExists);
+                    await file.CopyAsync(myPhotos, file.Name, NameCollisionOption.ReplaceExisting);
                 }
                 else
                 {
