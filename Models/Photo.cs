@@ -11,10 +11,13 @@ namespace UWPPhotoLibrary.Models
         public string FileName { get; set; }
         public string FilePath { get; set; }
         public Boolean isFavorite { get; set; }
-        public Photo(string filename, string filepath) { 
+        public string objectPath { get; set; }
+        public Photo() { }
+        
+        public Photo(string filename, string filepath, bool isChecked) { 
             FileName = filename;
             FilePath = filepath;
-            isFavorite = false;
+            isFavorite = isChecked;
         }
     }
 }

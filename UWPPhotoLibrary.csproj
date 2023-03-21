@@ -136,9 +136,6 @@
     <Content Include="Assets\Buttons\homebutton.PNG" />
     <Content Include="Assets\Buttons\pencilbutton.png" />
     <Content Include="Assets\Buttons\plusbutton.png" />
-    <Content Include="Assets\Images\default-cover-photo.png" />
-    <Content Include="Assets\Images\default-profile-image.png" />
-    <Content Include="Assets\Images\logo.png" />
     <Content Include="Assets\Images\Photos\abstract-2023235_960_720.png" />
     <Content Include="Assets\Images\Photos\alcoholic-drinks-7356721_960_720.png" />
     <Content Include="Assets\Images\Photos\bike-7342379_960_720.png" />
@@ -183,6 +180,9 @@
     <PackageReference Include="System.Drawing.Common">
       <Version>7.0.0</Version>
     </PackageReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Assets\Images\Objects\" />
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
