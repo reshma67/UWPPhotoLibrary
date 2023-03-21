@@ -28,16 +28,13 @@ namespace UWPPhotoLibrary
     /// </summary>
     public sealed partial class MainPage : Page
     {
-        private ObservableCollection<Photo> fixedphotos;
         private ObservableCollection<Photo> photos;
         private ObservableCollection<Photo> favphotos;
         public MainPage()
         {
             this.InitializeComponent();
-            fixedphotos = new ObservableCollection<Photo>();
             photos = new ObservableCollection<Photo>();
             favphotos = new ObservableCollection<Photo>();
-            //PhotoManager.GetPhotos(photos);
             PhotoManager.GetPhotosFromAssets(photos);
         }
 
@@ -50,23 +47,19 @@ namespace UWPPhotoLibrary
         {
             var checkBox = sender as CheckBox;
             var photo = checkBox.DataContext as Photo;
-            Debug.WriteLine("CheckBox_Click =>"+checkBox.IsChecked);
             if (checkBox == null)
             {
                 return;
-            }
-            
+            }  
             if (photo == null)
             {
                 return;
             }
             if(checkBox.IsChecked == true)
             {
-                photo.isFavorite = true;
-                File.WriteAllText(photo.objectPath, "true");
-
+                photo.IsFavorite = true;
+                File.WriteAllText(photo.ObjectPath, "true");
             }
-
         }
 
         private void homebutton_Click(object sender, RoutedEventArgs e)
@@ -77,7 +70,7 @@ namespace UWPPhotoLibrary
 
         private void favoritebutton_Click(object sender, RoutedEventArgs e)
         {
-            PhotoManager.getFavoritePhotos(photos, favphotos);
+            PhotoManager.GetFavoritePhotos(photos, favphotos);
             PhotoView.ItemsSource= favphotos;
         }
 
@@ -89,23 +82,20 @@ namespace UWPPhotoLibrary
             {
                 return;
             }
-            photo.isFavorite = false;
+            photo.IsFavorite = false;
             try
             {
-                File.WriteAllText(photo.objectPath, "false");
+                File.WriteAllText(photo.ObjectPath, "false");
             }
             catch (Exception ex)
             {
                 Debug.WriteLine(ex.Message);
             }
-            Debug.WriteLine("Inside uncheck");
-            Debug.WriteLine(photo.objectPath);
-            Debug.WriteLine(File.ReadAllText(photo.objectPath) + ";;;;;;;;;;;" + photo.objectPath);
         }
 
         private async void Add_Photo_Button(object sender, RoutedEventArgs e)
         {
-            await PhotoManager.addPhotos(photos);
+            await PhotoManager.AddPhotos(photos);
             PhotoManager.GetPhotosFromAssets(photos);
             PhotoView.ItemsSource = photos;
 

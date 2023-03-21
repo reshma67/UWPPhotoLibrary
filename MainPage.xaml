@@ -43,7 +43,7 @@
                         <DataTemplate x:DataType="data:Photo">
                             <StackPanel Orientation="Vertical">
                                 <Image Name="photoImage" Source= "{x:Bind FilePath}" Height="100" Width="100" Margin="10,10,0,0" />
-                                <CheckBox Name="checkbox" IsChecked="{x:Bind isFavorite}" Margin="10,10,0,0" Click="CheckBox_Click" Tag="{Binding}" Unchecked="CheckBox_Unchecked"/>
+                                <CheckBox Name="checkbox" IsChecked="{x:Bind IsFavorite}" Margin="10,10,0,0" Click="CheckBox_Click" Tag="{Binding}" Unchecked="CheckBox_Unchecked"/>
                             </StackPanel>
                         </DataTemplate>
                     </GridView.ItemTemplate>
