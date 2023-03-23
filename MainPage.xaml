@@ -23,29 +23,77 @@
         </Border>
         <!-- Cover Image needs to stretch across section, 
         and a circular profile photo must stack over cover photo in bottom, center alignment-->
-        <Image Grid.Row="1" Source="Assets/Images/Cover-Images/default-cover-image.jpg" Stretch="UniformToFill"/>
-        <Grid Grid.Row="1" x:Name="SingleImageContainer">
-            <Ellipse Height="150" Width="150">
+        <Image Grid.Row="1" 
+               Source="Assets/Images/Cover-Images/paint-smoke.jpg" 
+               Stretch="UniformToFill"/>
+        <Grid Grid.Row="1" 
+              x:Name="SingleImageContainer">
+            <Ellipse Height="100" 
+                     Width="100" 
+                     Margin="0,0,0,15">
                 <Ellipse.Fill>
-                    <ImageBrush ImageSource="Assets/Images/Profile-Images/default-profile-image.png" AlignmentX="Center" AlignmentY="Bottom" />
+                    <ImageBrush ImageSource="Assets/Images/Profile-Images/default-profile-image.png" 
+                                AlignmentX="Center" 
+                                AlignmentY="Bottom" />
                 </Ellipse.Fill>
             </Ellipse>
         </Grid>
-        <Border Grid.Row="2" Background="White">
-            <TextBlock Text="Photo Grid" FontSize="18" Padding="10"/>
+        <TextBlock Grid.Row="1" 
+                   Text="Description here..." 
+                   HorizontalAlignment="Center" 
+                   VerticalAlignment="Bottom" 
+                   Padding="10" 
+                   FontSize="16" />
+        <Border Grid.Row="2" 
+                Background="White">
+            <TextBlock Text="Photo Grid" 
+                       FontSize="18" 
+                       Padding="10"/>
         </Border>
-        <Border Grid.Row="3" Background="#7F7F7F">
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-                <Button  Margin="10,0,0,0" Background="#7F7F7F" ToolTipService.ToolTip ="Click to view the collection of favorites" >
-                    <Image Source="/Assets/Buttons/heartbutton.png" Width="50" Height="50" Opacity="0.5"/>
+        <Border Grid.Row="3" 
+                Background="#7F7F7F">
+            <StackPanel Orientation="Horizontal" 
+                        HorizontalAlignment="Center" 
+                        VerticalAlignment="Center">
+                <Button  Margin="10,0,0,0" 
+                         Background="#7F7F7F" 
+                         ToolTipService.ToolTip ="Click to view the collection of favorites" >
+                    <Image Source="/Assets/Buttons/heartbutton.png" 
+                           Width="50" 
+                           Height="50" 
+                           Opacity="0.5"/>
                 </Button>
-                <Button Margin="10,0,0,0" Background="#7F7F7F" ToolTipService.ToolTip ="Click to add photo to gallery">
-                    <Image Source="/Assets/Buttons/plusbutton.png" Width="50" Height="50" Opacity="0.5" />
+                <Button Margin="10,0,0,0" 
+                        Background="#7F7F7F" 
+                        ToolTipService.ToolTip ="Click to add photo to gallery">
+                    <Image Source="/Assets/Buttons/plusbutton.png" 
+                           Width="50" 
+                           Height="50" 
+                           Opacity="0.5" />
                 </Button>
-                <Button Margin="10,0,0,0"  Background="#7F7F7F" ToolTipService.ToolTip ="Click here edit the cover photo, profile photo and description" >
-                    <Image Source="/Assets/Buttons/pencilbutton.png" Width="50" Height="50" Opacity="0.5" />
+                <Button Name="EditPage"
+                        Margin="10,0,0,0"
+                        Background="#7F7F7F" 
+                        ToolTipService.ToolTip ="Click here edit the cover photo, profile photo and description" 
+                        Click="EditPage_Click">
+                    <Image Source="/Assets/Buttons/pencilbutton.png" 
+                           Width="50" 
+                           Height="50" 
+                           Opacity="0.5" />
                 </Button>
             </StackPanel>
         </Border>
+        <Grid>
+            <Popup x:Name="MenuPopup" IsOpen="False">
+                <Border Background="White" HorizontalAlignment="Center" VerticalAlignment="Center" Height="500" Width="500">
+                    <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <TextBlock Text="SimplePopup" FontSize="24" HorizontalAlignment="Center" />
+                        <Button Content="EditDescription" Click="EditDescription_Click" HorizontalAlignment="Center" />
+                        <Button Content="Close" Click="Close_Popup" HorizontalAlignment="Center" />
+                    </StackPanel>
+                </Border>
+            </Popup>
+        </Grid>
     </Grid>
 </Page>
+

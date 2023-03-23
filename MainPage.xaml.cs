@@ -29,6 +29,37 @@ namespace UWPPhotoLibrary
         {
             this.InitializeComponent();
         }
-        
+        void EditPage_Click(object sender, RoutedEventArgs e)
+        {
+            if (!MenuPopup.IsOpen) { MenuPopup.IsOpen = true; }
+        }
+
+        private async void EditDescription_Click(object sender, RoutedEventArgs e)
+        {
+            TextBox input = new TextBox()
+            {
+                Height = (double)App.Current.Resources["TextControlThemeMinHeight"],
+                PlaceholderText = "Photos of Art I Like, etc."
+            };
+            ContentDialog dialog = new ContentDialog()
+            {
+                Title = "Update Description",
+                MaxWidth = this.ActualWidth,
+                PrimaryButtonText = "OK",
+                SecondaryButtonText = "Cancel",
+                Content = input
+            };
+            ContentDialogResult result = await dialog.ShowAsync();
+            if (result == ContentDialogResult.Primary)
+            {
+                input = (TextBox)dialog.Content;
+                await new Windows.UI.Popups.MessageDialog(input.Text).ShowAsync();
+            }
+        }
+
+        private void Close_Popup(object sender, RoutedEventArgs e)
+        {
+            if (MenuPopup.IsOpen) { MenuPopup.IsOpen = false; }
+        }
     }
 }
