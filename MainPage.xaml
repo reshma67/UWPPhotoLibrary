@@ -8,6 +8,7 @@
     mc:Ignorable="d"
     xmlns:data ="using:UWPPhotoLibrary.Models"
     xmlns:behaviors="using:Microsoft.Xaml.Behaviors"
+    xmlns:winui="using:Microsoft.UI.Xaml.Controls"
 
 
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
@@ -26,7 +27,14 @@
             </StackPanel>
         </Border>
         <Border Grid.Row="1" Background="White">
-            <Image Source="Assets/Images/default-cover-photo.png" Stretch="UniformToFill" />
+            <Grid>
+                <Popup x:Name="photoPopup" IsOpen="False">
+                    <Border Background="Black" Margin="250,50,0,0">
+                        <Image Source="{Binding ElementName=photoPopup, Path=Tag}" Stretch="Fill"  Tapped="Image_Tapped"/>
+                    </Border>
+                </Popup>
+                <Image Source="Assets/Images/default-cover-photo.png" Stretch="UniformToFill" />
+            </Grid>
         </Border>
         <Border Grid.Row="2" Background="White">
             <Grid>
@@ -42,7 +50,7 @@
                     <GridView.ItemTemplate>
                         <DataTemplate x:DataType="data:Photo">
                             <StackPanel Orientation="Vertical">
-                                <Image Name="photoImage" Source= "{x:Bind FilePath}" Height="100" Width="100" Margin="10,10,0,0" />
+                                <Image Name="photoImage" Source= "{x:Bind FilePath}" Height="100" Width="100" Margin="10,10,0,0" Tapped="Image_Tapped" />
                                 <CheckBox Name="checkbox" IsChecked="{x:Bind IsFavorite}" Margin="10,10,0,0" Click="CheckBox_Click" Tag="{Binding}" Unchecked="CheckBox_Unchecked"/>
                             </StackPanel>
                         </DataTemplate>

@@ -97,5 +97,34 @@ namespace UWPPhotoLibrary
             PhotoView.ItemsSource = photos;
 
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Close_Click(object sender, RoutedEventArgs e)
+        {
+         
+        }
+        private void Image_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            var image = (sender as Image);
+            if (image != null)
+            {
+                if (photoPopup.IsOpen == false)
+                {
+                    photoPopup.Tag = image.Source;
+                    photoPopup.IsOpen = true;
+                }
+                else
+                {
+                    photoPopup.IsOpen = false;
+
+                }
+            }
+        }
+
     }
+
 }
