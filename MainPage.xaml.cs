@@ -57,9 +57,18 @@ namespace UWPPhotoLibrary
             }
         }
 
-        private void Close_Popup(object sender, RoutedEventArgs e)
+        private void Submit_Popup(object sender, RoutedEventArgs e)
         {
             if (MenuPopup.IsOpen) { MenuPopup.IsOpen = false; }
+        }
+
+        private void EditCoverButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+        private void EditProfileButton_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

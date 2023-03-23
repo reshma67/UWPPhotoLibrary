@@ -23,6 +23,19 @@
         </Border>
         <!-- Cover Image needs to stretch across section, 
         and a circular profile photo must stack over cover photo in bottom, center alignment-->
+        <Grid>
+            <Popup x:Name="MenuPopup" IsOpen="False" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,70,300,0">
+                <Border Background="LightGray" Height="300" Width="300" >
+                    <StackPanel>
+                        <TextBlock Text="Edit Album" FontSize="24" HorizontalAlignment="Center" />
+                        <Button Content="Edit Description" Click="EditDescription_Click" HorizontalAlignment="Center" Margin="10,10,10,10" />
+                        <Button Content="Edit Cover Photo" Click="EditCoverButton_Click"  HorizontalAlignment="Center" Margin="10,10,10,10" />
+                        <Button Content="Edit Profile Picture" Click="EditProfileButton_Click"  HorizontalAlignment="Center" Margin="10,10,10,10" />
+                        <Button Content="Submit" Click="Submit_Popup" HorizontalAlignment="Center" Margin="10,60,10,18" />
+                    </StackPanel>
+                </Border>
+            </Popup>
+        </Grid>
         <Image Grid.Row="1" 
                Source="Assets/Images/Cover-Images/paint-smoke.jpg" 
                Stretch="UniformToFill"/>
@@ -83,17 +96,6 @@
                 </Button>
             </StackPanel>
         </Border>
-        <Grid>
-            <Popup x:Name="MenuPopup" IsOpen="False">
-                <Border Background="White" HorizontalAlignment="Center" VerticalAlignment="Center" Height="500" Width="500">
-                    <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
-                        <TextBlock Text="SimplePopup" FontSize="24" HorizontalAlignment="Center" />
-                        <Button Content="EditDescription" Click="EditDescription_Click" HorizontalAlignment="Center" />
-                        <Button Content="Close" Click="Close_Popup" HorizontalAlignment="Center" />
-                    </StackPanel>
-                </Border>
-            </Popup>
-        </Grid>
     </Grid>
 </Page>
 
