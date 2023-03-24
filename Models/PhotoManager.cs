@@ -5,7 +5,10 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.Networking.NetworkOperators;
 using Windows.Storage;
+using Windows.Storage.Pickers;
+using Windows.UI.Xaml.Media.Imaging;
 
 namespace UWPPhotoLibrary.Models
 {
@@ -38,5 +41,29 @@ namespace UWPPhotoLibrary.Models
             }
             photolist.ForEach(photo => favphotos.Add(photo));
         }
+       /* public async static void storeInformation(ProfileContent profileContent) 
+        {
+            FileOpenPicker openPicker = new FileOpenPicker();
+            openPicker.ViewMode = PickerViewMode.Thumbnail;
+            openPicker.SuggestedStartLocation = PickerLocationId.PicturesLibrary;
+            openPicker.FileTypeFilter.Add(".jpg");
+            openPicker.FileTypeFilter.Add(".png");
+            StorageFile file = await openPicker.PickSingleFileAsync();
+
+            if (file != null)
+            {
+                var stream = await file.OpenAsync(Windows.Storage.FileAccessMode.Read);
+                var image = new BitmapImage();
+                image.SetSource(stream);
+               // profileImage.ImageSource = image;
+            }
+            else
+            {
+                //
+            }
+            StorageFolder localFolder = ApplicationData.Current.LocalFolder;
+            StorageFolder profilePhotos = await localFolder.CreateFolderAsync("ProfilePhotos", CreationCollisionOption.OpenIfExists);
+            await file.CopyAsync(profilePhotos, file.Name, NameCollisionOption.ReplaceExisting);
+        } */
     }
 }

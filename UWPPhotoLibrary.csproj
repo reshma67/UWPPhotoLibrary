@@ -124,6 +124,7 @@
     </Compile>
     <Compile Include="Models\Photo.cs" />
     <Compile Include="Models\PhotoManager.cs" />
+    <Compile Include="Models\ProfileContent.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

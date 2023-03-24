@@ -34,6 +34,7 @@ namespace UWPPhotoLibrary
         private ObservableCollection<Photo> fixedphotos;
         private ObservableCollection<Photo> photos;
         private ObservableCollection<Photo> favphotos;
+        private ProfileContent profileContent;
         public MainPage()
         {
             this.InitializeComponent();
@@ -42,7 +43,9 @@ namespace UWPPhotoLibrary
             favphotos = new ObservableCollection<Photo>();
             //PhotoManager.GetPhotos(photos);
             PhotoManager.GetPhotosFromAssets(photos);
+            profileContent = new ProfileContent();
         }
+
 
         private void PhotoView_ItemClick(object sender, ItemClickEventArgs e)
         {
