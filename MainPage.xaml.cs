@@ -8,6 +8,7 @@ using Windows.Devices.Input;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI;
+using System.Windows;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -16,6 +17,9 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using UWPPhotoLibrary.Models;
+using Windows.Storage.Pickers;
+using Windows.Storage;
+using Windows.UI.Xaml.Media.Imaging;
 
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
@@ -93,8 +97,7 @@ namespace UWPPhotoLibrary
             ContentDialogResult result = await dialog.ShowAsync();
             if (result == ContentDialogResult.Primary)
             {
-                input = (TextBox)dialog.Content;
-                await new Windows.UI.Popups.MessageDialog(input.Text).ShowAsync();
+                profileDescription.Text = input.Text;
             }
         }
         private void Submit_Popup(object sender, RoutedEventArgs e)
@@ -102,13 +105,49 @@ namespace UWPPhotoLibrary
             if (MenuPopup.IsOpen) { MenuPopup.IsOpen = false; }
         }
 
-        private void EditCoverButton_Click(object sender, RoutedEventArgs e)
+        private async void EditCoverButton_Click(object sender, RoutedEventArgs e)
         {
+            FileOpenPicker openPicker= new FileOpenPicker();
+            openPicker.ViewMode = PickerViewMode.Thumbnail;
+            openPicker.SuggestedStartLocation = PickerLocationId.PicturesLibrary;
+            openPicker.FileTypeFilter.Add(".jpg");
+            openPicker.FileTypeFilter.Add(".png");
+            StorageFile file = await openPicker.PickSingleFileAsync();
+
+            if (file != null) 
+            { 
+                var stream = await file.OpenAsync(Windows.Storage.FileAccessMode.Read);
+                var image = new BitmapImage();
+                image.SetSource(stream);
+                coverImage.Source = image;
+            }
+            else 
+            { 
+            //
+            }
+
 
         }
-        private void EditProfileButton_Click(object sender, RoutedEventArgs e)
+        private async void EditProfileButton_Click(object sender, RoutedEventArgs e)
         {
+            FileOpenPicker openPicker = new FileOpenPicker();
+            openPicker.ViewMode = PickerViewMode.Thumbnail;
+            openPicker.SuggestedStartLocation = PickerLocationId.PicturesLibrary;
+            openPicker.FileTypeFilter.Add(".jpg");
+            openPicker.FileTypeFilter.Add(".png");
+            StorageFile file = await openPicker.PickSingleFileAsync();
 
+            if (file != null)
+            {
+                var stream = await file.OpenAsync(Windows.Storage.FileAccessMode.Read);
+                var image = new BitmapImage();
+                image.SetSource(stream);
+                profileImage.ImageSource = image;
+            }
+            else
+            {
+                //
+            }
         }
     }
 }

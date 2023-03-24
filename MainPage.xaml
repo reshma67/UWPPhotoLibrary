@@ -45,7 +45,7 @@
             </Popup>
         </Grid>
         <Border Grid.Row="1" Background="White">
-            <Image Source="Assets/Images/Cover-Images/paint-smoke.jpg" Stretch="UniformToFill" />
+            <Image x:Name="coverImage" Source="Assets/Images/Cover-Images/paint-smoke.jpg" Stretch="UniformToFill" />
         </Border>
         <Grid Grid.Row="1" 
               x:Name="SingleImageContainer">
@@ -53,13 +53,15 @@
                      Width="100" 
                      Margin="0,0,0,15">
                 <Ellipse.Fill>
-                    <ImageBrush ImageSource="Assets/Images/Profile-Images/default-profile-image.png" 
+                    <ImageBrush x:Name="profileImage"
+                                ImageSource="Assets/Images/Profile-Images/default-profile-image.png" 
                                 AlignmentX="Center" 
                                 AlignmentY="Bottom" />
                 </Ellipse.Fill>
             </Ellipse>
         </Grid>
         <TextBlock Grid.Row="1" 
+                   x:Name="profileDescription"
                    Text="Description here..." 
                    HorizontalAlignment="Center" 
                    VerticalAlignment="Bottom" 
