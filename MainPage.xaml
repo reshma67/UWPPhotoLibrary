@@ -20,14 +20,51 @@
             <RowDefinition Height="5*"/>
             <RowDefinition Height="1.5*"/>
         </Grid.RowDefinitions>
-        <Border Grid.Row="0" Background="#7F7F7F">
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-                <Image Width="100" VerticalAlignment="Center" HorizontalAlignment="Center" Source="Assets/Images/logo.png" />
+        <Border Grid.Row="0" 
+                Background="#7F7F7F">
+            <StackPanel Orientation="Horizontal" 
+                        HorizontalAlignment="Center" 
+                        VerticalAlignment="Center">
+                <Image Width="75" 
+                       VerticalAlignment="Center" 
+                       HorizontalAlignment="Center" 
+                       Source="Assets/Images/logo.png" />
             </StackPanel>
         </Border>
+        <Grid>
+            <Popup x:Name="MenuPopup" IsOpen="False" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,70,300,0">
+                <Border Background="LightGray" Height="300" Width="300" >
+                    <StackPanel>
+                        <TextBlock Text="Edit Album" FontSize="24" HorizontalAlignment="Center" />
+                        <Button Content="Edit Description" Click="EditDescription_Click" HorizontalAlignment="Center" Margin="10,10,10,10" />
+                        <Button Content="Edit Cover Photo" Click="EditCoverButton_Click"  HorizontalAlignment="Center" Margin="10,10,10,10" />
+                        <Button Content="Edit Profile Picture" Click="EditProfileButton_Click"  HorizontalAlignment="Center" Margin="10,10,10,10" />
+                        <Button Content="Submit" Click="Submit_Popup" HorizontalAlignment="Center" Margin="10,60,10,18" />
+                    </StackPanel>
+                </Border>
+            </Popup>
+        </Grid>
         <Border Grid.Row="1" Background="White">
-            <Image Source="Assets/Images/default-cover-photo.png" Stretch="UniformToFill" />
+            <Image Source="Assets/Images/Cover-Images/paint-smoke.jpg" Stretch="UniformToFill" />
         </Border>
+        <Grid Grid.Row="1" 
+              x:Name="SingleImageContainer">
+            <Ellipse Height="100" 
+                     Width="100" 
+                     Margin="0,0,0,15">
+                <Ellipse.Fill>
+                    <ImageBrush ImageSource="Assets/Images/Profile-Images/default-profile-image.png" 
+                                AlignmentX="Center" 
+                                AlignmentY="Bottom" />
+                </Ellipse.Fill>
+            </Ellipse>
+        </Grid>
+        <TextBlock Grid.Row="1" 
+                   Text="Description here..." 
+                   HorizontalAlignment="Center" 
+                   VerticalAlignment="Bottom" 
+                   Padding="10" 
+                   FontSize="16" />
         <Border Grid.Row="2" Background="White">
             <Grid>
                 <Grid.RowDefinitions>
@@ -61,7 +98,7 @@
                 <Button Margin="10,0,0,0" Background="#7F7F7F" ToolTipService.ToolTip ="Click to add photo to gallery">
                     <Image Source="/Assets/Buttons/plusbutton.png" Width="50" Height="50" Opacity="0.5" />
                 </Button>
-                <Button Margin="10,0,0,0"  Background="#7F7F7F" ToolTipService.ToolTip ="Click here edit the cover photo, profile photo and description" >
+                <Button Name="EditPage" Click="EditPage_Click" Margin="10,0,0,0"  Background="#7F7F7F" ToolTipService.ToolTip ="Click here edit the cover photo, profile photo and description" >
                     <Image Source="/Assets/Buttons/pencilbutton.png" Width="50" Height="50" Opacity="0.5" />
                 </Button>
             </StackPanel>

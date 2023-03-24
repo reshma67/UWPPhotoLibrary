@@ -136,6 +136,16 @@
     <Content Include="Assets\Buttons\homebutton.PNG" />
     <Content Include="Assets\Buttons\pencilbutton.png" />
     <Content Include="Assets\Buttons\plusbutton.png" />
+    <Content Include="Assets\Images\Brand-Images\logo.png" />
+    <Content Include="Assets\Images\Cover-Images\butterflies.jpg" />
+    <Content Include="Assets\Images\Cover-Images\fairy-lights.jpg" />
+    <Content Include="Assets\Images\Cover-Images\leaf-berry-pattern.jpg" />
+    <Content Include="Assets\Images\Cover-Images\paint-smoke.jpg" />
+    <Content Include="Assets\Images\Cover-Images\palm-trees.jpg" />
+    <Content Include="Assets\Images\Cover-Images\planets.jpg" />
+    <Content Include="Assets\Images\Cover-Images\roses.jpg" />
+    <Content Include="Assets\Images\Cover-Images\satin-sheets.jpg" />
+    <Content Include="Assets\Images\Cover-Images\sunset.jpg" />
     <Content Include="Assets\Images\default-cover-photo.png" />
     <Content Include="Assets\Images\default-profile-image.png" />
     <Content Include="Assets\Images\logo.png" />
@@ -154,6 +164,7 @@
     <Content Include="Assets\Images\Photos\seat-7354939_960_720.png" />
     <Content Include="Assets\Images\Photos\watercolor-6475471_960_720.png" />
     <Content Include="Assets\Images\Photos\woman-6289052_960_720.png" />
+    <Content Include="Assets\Images\Profile-Images\default-profile-image.png" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />
     <Content Include="Assets\SplashScreen.scale-200.png" />
