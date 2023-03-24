@@ -23,7 +23,8 @@ namespace UWPPhotoLibrary.Models
             {
                 var name = file.DisplayName;
                 var path = file.Path;
-                photos.Add(new Photo(name, path));
+                bool isCheck = false;
+                photos.Add(new Photo(name, path, isCheck));
                 //Debug.WriteLine(name + " " + path);
             }
         }
