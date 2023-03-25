@@ -100,5 +100,20 @@ AddPhotos(ObservableCollection<Photo> photos)
             }
         }
 
+        public static async void  GetProfile(ObservableCollection<String> list)
+        {
+            StorageFolder localFolder = ApplicationData.Current.LocalFolder;
+            StorageFolder Profile = await localFolder.CreateFolderAsync("Profile", CreationCollisionOption.OpenIfExists);
+            var descriptionFile = await Profile.CreateFileAsync("description.txt", Windows.Storage.CreationCollisionOption.OpenIfExists);
+            var Description = await File.ReadAllTextAsync(descriptionFile.Path, Encoding.UTF8);
+            StorageFile coverphoto = await Profile.CreateFileAsync("coverphoto.jpg", CreationCollisionOption.OpenIfExists);
+            //profileContent.CoverPhoto = coverphoto.Path;
+            StorageFile profilephoto = await Profile.CreateFileAsync("profilephoto.jpg", CreationCollisionOption.OpenIfExists);
+            //profileContent.ProfilePhoto = profilephoto.Path;
+            list.Add(Description);
+            list.Add(coverphoto.Path);
+            list.Add(profilephoto.Path);
+        }
+
     }
 }
