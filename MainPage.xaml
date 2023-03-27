@@ -62,7 +62,7 @@
                                 AlignmentY="Bottom" />
                                     </Ellipse.Fill>
                                 </Ellipse>
-                                <TextBlock Name="profileDescription" Text="{x:Bind Description, TargetNullValue='Description Here'}"
+                                <TextBlock Name="profileDescription" Text="{x:Bind Description}"
                                HorizontalAlignment="Center"
                                VerticalAlignment="Bottom"
                                Padding="10"

@@ -137,7 +137,11 @@ AddPhotos(ObservableCollection<Photo> photos)
             //var profilePath = Path.Combine(ApplicationData.Current.LocalFolder.Path, "Profile", "profilephoto.jpg");
 
             var profileContent = new ProfileContent();
-            profileContent.Description = Description;
+
+            if (Description != "")
+            {
+                profileContent.Description = Description;
+            }
             if (latestCoverFile != null)
             {
                 profileContent.CoverPhoto = coverfilePath;
