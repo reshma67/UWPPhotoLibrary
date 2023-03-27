@@ -7,11 +7,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     xmlns:data ="using:UWPPhotoLibrary.Models"
-    xmlns:behaviors="using:Microsoft.Xaml.Behaviors"
-    xmlns:winui="using:Microsoft.UI.Xaml.Controls"
-  
-
-
+    xmlns:winui="using:Microsoft.UI.Xaml.Controls" xmlns:data1="using:System"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
 
@@ -28,8 +24,13 @@
                 <Image Width="100" VerticalAlignment="Center" HorizontalAlignment="Center" Source="Assets/Images/logo.png" />
             </StackPanel>
         </Border>
+        <Popup x:Name="photoPopup" IsOpen="False">
+            <Border Background="Black" Margin="250,50,0,0">
+                <Image Source="{Binding ElementName=photoPopup, Path=Tag}" Stretch="Fill"  Tapped="Image_Tapped"/>
+            </Border>
+        </Popup>
         <Grid>
-            <Popup x:Name="MenuPopup" IsOpen="False" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,70,300,0" DataContext="{x:Bind profileContent}">
+            <Popup x:Name="MenuPopup" IsOpen="False" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,70,300,0">
                 <Border Background="LightGray" Height="300" Width="300" >
                     <StackPanel>
                         <TextBlock Text="Edit Album" FontSize="24" HorizontalAlignment="Center" />
@@ -41,37 +42,35 @@
                 </Border>
             </Popup>
         </Grid>
-        <Popup x:Name="photoPopup" IsOpen="False">
-            <Border Background="Black" Margin="250,50,0,0">
-                <Image Source="{Binding ElementName=photoPopup, Path=Tag}" Stretch="Fill"  Tapped="Image_Tapped"/>
-            </Border>
-        </Popup>
 
         <Border Grid.Row="1" Background="White">
-            <Grid >
-                <GridView  Grid.Row="1" 
-              x:Name="SingleImageContainer"
-              ItemsSource="{x:Bind profileContent}">
-                </GridView>
-                <Image x:Name="coverImage" Source="{x:Bind profileContent.CoverPhoto, FallbackValue=Assets/Images/Cover-Images/paint-smoke.jpg}" Stretch="UniformToFill" />
-                <Ellipse Height="100" 
+            <Grid>
+                <GridView Grid.Row="1"
+              x:Name="ProfileGridView"
+              ItemsSource="{x:Bind profileContents}">
+                    <GridView.ItemTemplate>
+                        <DataTemplate x:DataType="data:ProfileContent">
+                            <Grid>
+                                <Image Name="coverImage" Source="{x:Bind CoverPhoto, FallbackValue=Assets/Images/Cover-Images/paint-smoke.jpg}" Stretch="UniformToFill" />
+                                <Ellipse Height="100" 
                      Width="100" 
                      Margin="0,0,0,15">
-                    <Ellipse.Fill>
-                        <ImageBrush x:Name="profileImage"
-                                ImageSource="{x:Bind profileContent.ProfilePhoto, FallbackValue=Assets/Images/Profile-Images/default-profile-image.png}" 
+                                    <Ellipse.Fill>
+                                        <ImageBrush x:Name="profileImage"
+                                ImageSource="{x:Bind ProfilePhoto, FallbackValue=Assets/Images/Profile-Images/default-profile-image.png}" 
                                 AlignmentX="Center" 
                                 AlignmentY="Bottom" />
-                    </Ellipse.Fill>
-                </Ellipse>
-
-                <TextBlock Grid.Row="1" 
-                   x:Name="profileDescription"
-                   Text="{x:Bind profileContent.Description, TargetNullValue='Description Here'}" 
-                   HorizontalAlignment="Center" 
-                   VerticalAlignment="Bottom" 
-                   Padding="10" 
-                   FontSize="16" />
+                                    </Ellipse.Fill>
+                                </Ellipse>
+                                <TextBlock Name="profileDescription" Text="{x:Bind Description, TargetNullValue='Description Here'}"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Bottom"
+                               Padding="10"
+                               FontSize="16"/>
+                            </Grid>
+                        </DataTemplate>
+                    </GridView.ItemTemplate>
+                </GridView>
             </Grid>
         </Border>
         <Border Grid.Row="2" Background="White">

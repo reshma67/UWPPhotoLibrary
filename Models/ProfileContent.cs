@@ -11,12 +11,14 @@ namespace UWPPhotoLibrary.Models
         public String CoverPhoto { get; set; }
         public String ProfilePhoto { get; set; }
         public String Description { get; set; }
-        public ProfileContent() { }
+        public ProfileContent() {
+            CoverPhoto = "Assets/Images/Cover-Images/paint-smoke.jpg";
+            ProfilePhoto = "Assets/Images/Profile-Images/default-profile-image.png";
+            Description = "Add description";
+
+        }
         
-        /*public ProfileContent(String coverPhoto, String profilePhoto, String description) {
-            CoverPhoto = coverPhoto;
-            ProfilePhoto= profilePhoto;
-            Description = description; */
+        
         
     }
 }

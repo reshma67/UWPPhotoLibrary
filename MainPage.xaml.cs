@@ -30,10 +30,11 @@ namespace UWPPhotoLibrary
     /// </summary>
     public sealed partial class MainPage : Page
     {
+
         private ObservableCollection<Photo> photos;
         private ObservableCollection<Photo> favphotos;
-        private ObservableCollection<String> list;
-        public ProfileContent profileContent { get; set; }
+        private ObservableCollection<ProfileContent> profileContents;
+
 
 
         public MainPage()
@@ -41,11 +42,9 @@ namespace UWPPhotoLibrary
             this.InitializeComponent();
             photos = new ObservableCollection<Photo>();
             favphotos = new ObservableCollection<Photo>();
-            profileContent = new ProfileContent();
+            profileContents = new ObservableCollection<ProfileContent>();
             PhotoManager.GetPhotosFromAssets(photos);
-            list = new ObservableCollection<String>();
-            PhotoManager.GetProfile(list);
-            //Debug.WriteLine(list[0]);
+            PhotoManager.GetProfile(profileContents);
         }
 
         private void PhotoView_ItemClick(object sender, ItemClickEventArgs e)
@@ -160,32 +159,25 @@ namespace UWPPhotoLibrary
             ContentDialogResult result = await dialog.ShowAsync();
             if (result == ContentDialogResult.Primary)
             {
-                profileDescription.Text = input.Text;
                 StorageFolder localFolder = ApplicationData.Current.LocalFolder;
                 StorageFolder Profile = await localFolder.CreateFolderAsync("Profile", CreationCollisionOption.OpenIfExists);
                 var descriptionFile = await Profile.CreateFileAsync("description.txt", Windows.Storage.CreationCollisionOption.OpenIfExists);
-                File.WriteAllText(descriptionFile.Path, profileDescription.Text);
+                File.WriteAllText(descriptionFile.Path, input.Text);
+                //PhotoManager.GetProfile(profileContents);
+
+                
+                
             }
         }
-        private async void Submit_Popup(object sender, RoutedEventArgs e)
+        private void Submit_Popup(object sender, RoutedEventArgs e)
         {
             if (MenuPopup.IsOpen) { MenuPopup.IsOpen = false; }
-            var element = sender as FrameworkElement;
+
+            //Debug.WriteLine(profileContents.ToList());
+            //PhotoManager.GetProfile(profileContents);
+            ProfileGridView.ItemsSource = profileContents;
             
-            
-            var profileContent = element?.DataContext as ProfileContent;
-            if(profileContent == null)
-            {
-                profileContent = new ProfileContent();
-            }
-            StorageFolder localFolder = ApplicationData.Current.LocalFolder;
-            StorageFolder Profile = await localFolder.CreateFolderAsync("Profile", CreationCollisionOption.OpenIfExists);
-            var descriptionFile = await Profile.CreateFileAsync("description.txt", Windows.Storage.CreationCollisionOption.OpenIfExists);
-            profileContent.Description = await File.ReadAllTextAsync(descriptionFile.Path, Encoding.UTF8);
-            StorageFile coverphoto = await Profile.CreateFileAsync("coverphoto.jpg", CreationCollisionOption.OpenIfExists);
-            profileContent.CoverPhoto = coverphoto.Path;
-            StorageFile profilephoto = await Profile.CreateFileAsync("profilephoto.jpg", CreationCollisionOption.OpenIfExists);
-            profileContent.ProfilePhoto = profilephoto.Path;
+           
         }
 
         private async void EditCoverButton_Click(object sender, RoutedEventArgs e)
@@ -196,25 +188,23 @@ namespace UWPPhotoLibrary
             openPicker.FileTypeFilter.Add(".jpg");
             openPicker.FileTypeFilter.Add(".png");
             StorageFile file = await openPicker.PickSingleFileAsync();
-            StorageFolder localFolder = ApplicationData.Current.LocalFolder;
-            StorageFolder Profile = await localFolder.CreateFolderAsync("Profile", CreationCollisionOption.OpenIfExists);
-            await file.CopyAsync(Profile, "coverphoto.jpg", NameCollisionOption.ReplaceExisting);
-
-
-
+            Debug.WriteLine(file.Name);
             if (file != null)
             {
+                
+
                 var stream = await file.OpenAsync(Windows.Storage.FileAccessMode.Read);
                 var image = new BitmapImage();
                 image.SetSource(stream);
-                coverImage.Source = image;
-            }
-            else
-            {
-                //
-            }
+                StorageFolder localFolder = ApplicationData.Current.LocalFolder;
+                //StorageFolder Profile = await localFolder.CreateFolderAsync("Profile", CreationCollisionOption.OpenIfExists);
+                StorageFolder CoverPhotos = await localFolder.CreateFolderAsync("CoverPhotos", CreationCollisionOption.OpenIfExists);
+                string coverFileName = "coverphoto_" + DateTime.Now.ToString("yyyyMMddHHmmss") + ".jpg";
+                await file.CopyAsync(CoverPhotos, coverFileName, NameCollisionOption.ReplaceExisting);
+                PhotoManager.GetProfile(profileContents);
 
-
+            }
+           
         }
         private async void EditProfileButton_Click(object sender, RoutedEventArgs e)
         {
@@ -224,20 +214,16 @@ namespace UWPPhotoLibrary
             openPicker.FileTypeFilter.Add(".jpg");
             openPicker.FileTypeFilter.Add(".png");
             StorageFile file = await openPicker.PickSingleFileAsync();
-            StorageFolder localFolder = ApplicationData.Current.LocalFolder;
-            StorageFolder Profile = await localFolder.CreateFolderAsync("Profile", CreationCollisionOption.OpenIfExists);
-            await file.CopyAsync(Profile, "profilephoto.jpg", NameCollisionOption.ReplaceExisting);
-
             if (file != null)
             {
-                var stream = await file.OpenAsync(Windows.Storage.FileAccessMode.Read);
-                var image = new BitmapImage();
-                image.SetSource(stream);
-                profileImage.ImageSource = image;
-            }
-            else
-            {
-                //
+                Debug.WriteLine(file.Name);
+                StorageFolder localFolder = ApplicationData.Current.LocalFolder;
+                //StorageFolder Profile = await localFolder.CreateFolderAsync("Profile", CreationCollisionOption.OpenIfExists);
+                StorageFolder ProfilePhotos = await localFolder.CreateFolderAsync("ProfilePhotos", CreationCollisionOption.OpenIfExists);
+                string profileFileName = "profilephoto_" + DateTime.Now.ToString("yyyyMMddHHmmss") + ".jpg";
+                await file.CopyAsync(ProfilePhotos, profileFileName, NameCollisionOption.ReplaceExisting);
+                PhotoManager.GetProfile(profileContents);
+
             }
         }
 

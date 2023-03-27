@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 using Windows.Storage;
+using Windows.UI.Xaml.Media.Imaging;
 using Windows.UI.Xaml.Shapes;
 using Path = System.IO.Path;
 
@@ -100,20 +101,61 @@ AddPhotos(ObservableCollection<Photo> photos)
             }
         }
 
-        public static async void  GetProfile(ObservableCollection<String> list)
+        public static async void GetProfile(ObservableCollection<ProfileContent> profileContents)
         {
+            profileContents.Clear();
+            StorageFile coverphoto;
+            StorageFile profilephoto;
+            var profilePath = "";
+            var coverfilePath = "";
             StorageFolder localFolder = ApplicationData.Current.LocalFolder;
             StorageFolder Profile = await localFolder.CreateFolderAsync("Profile", CreationCollisionOption.OpenIfExists);
             var descriptionFile = await Profile.CreateFileAsync("description.txt", Windows.Storage.CreationCollisionOption.OpenIfExists);
             var Description = await File.ReadAllTextAsync(descriptionFile.Path, Encoding.UTF8);
-            StorageFile coverphoto = await Profile.CreateFileAsync("coverphoto.jpg", CreationCollisionOption.OpenIfExists);
-            //profileContent.CoverPhoto = coverphoto.Path;
-            StorageFile profilephoto = await Profile.CreateFileAsync("profilephoto.jpg", CreationCollisionOption.OpenIfExists);
-            //profileContent.ProfilePhoto = profilephoto.Path;
-            list.Add(Description);
-            list.Add(coverphoto.Path);
-            list.Add(profilephoto.Path);
+            //coverphoto = await Profile.CreateFileAsync("coverphoto.jpg", CreationCollisionOption.OpenIfExists);
+            //profilephoto = await Profile.CreateFileAsync("profilephoto.jpg", CreationCollisionOption.OpenIfExists);
+
+            StorageFolder CoverPhotos = await localFolder.CreateFolderAsync("CoverPhotos", CreationCollisionOption.OpenIfExists);
+            StorageFolder ProfilePhotos = await localFolder.CreateFolderAsync("ProfilePhotos", CreationCollisionOption.OpenIfExists);
+
+            var coverFiles = await CoverPhotos.GetFilesAsync();
+            var profileFiles = await ProfilePhotos.GetFilesAsync();
+            var latestProfileFile = profileFiles.OrderByDescending(f => f.DateCreated).FirstOrDefault(f => f.Name.StartsWith("profilephoto_"));
+            var latestCoverFile = coverFiles.OrderByDescending(f => f.DateCreated).FirstOrDefault(f => f.Name.StartsWith("coverphoto_"));
+            if (latestProfileFile != null)
+            {
+                profilePath = latestProfileFile.Path;
+                // Add profile content to collection
+            }
+            if (latestCoverFile != null)
+            {
+                coverfilePath = latestCoverFile.Path;
+                // Add profile content to collection
+            }
+
+            //var coverPath = Path.Combine(ApplicationData.Current.LocalFolder.Path, "Profile", "coverphoto.jpg");
+            //var profilePath = Path.Combine(ApplicationData.Current.LocalFolder.Path, "Profile", "profilephoto.jpg");
+
+            var profileContent = new ProfileContent();
+            profileContent.Description = Description;
+            if (latestCoverFile != null)
+            {
+                profileContent.CoverPhoto = coverfilePath;
+            }
+
+            if (latestProfileFile != null)
+            {
+                profileContent.ProfilePhoto = profilePath;
+            }
+            
+            profileContents.Add(profileContent);
+
+            Debug.WriteLine(profileContent.Description);
+            Debug.WriteLine(profileContent.CoverPhoto);
+            Debug.WriteLine(profileContent.ProfilePhoto);
+
         }
+
 
     }
 }
