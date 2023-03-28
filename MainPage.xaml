@@ -54,17 +54,20 @@
                                 <Image Name="coverImage" Source="{x:Bind CoverPhoto, FallbackValue=Assets/Images/Cover-Images/paint-smoke.jpg}" Stretch="UniformToFill" />
                                 <Ellipse Height="100" 
                      Width="100" 
-                     Margin="0,0,0,15">
+                     Margin="0,-90,0,15">
                                     <Ellipse.Fill>
                                         <ImageBrush x:Name="profileImage"
                                 ImageSource="{x:Bind ProfilePhoto, FallbackValue=Assets/Images/Profile-Images/default-profile-image.png}" 
                                 AlignmentX="Center" 
-                                AlignmentY="Bottom" />
+                                AlignmentY="Center" />
                                     </Ellipse.Fill>
                                 </Ellipse>
                                 <TextBlock Name="profileDescription" Text="{x:Bind Description}"
                                HorizontalAlignment="Center"
-                               VerticalAlignment="Bottom"
+                               VerticalAlignment="Center"
+                               Foreground="White"
+                               FontWeight="ExtraBold"
+                               Margin="0, 15, 0, 0"
                                Padding="10"
                                FontSize="16"/>
                             </Grid>
