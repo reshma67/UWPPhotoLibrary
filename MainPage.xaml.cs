@@ -40,10 +40,20 @@ namespace UWPPhotoLibrary
         public MainPage()
         {
             this.InitializeComponent();
+
+            //collection holding the photos
             photos = new ObservableCollection<Photo>();
+            
+            //collection holding the favorite photos
             favphotos = new ObservableCollection<Photo>();
+            
+            //Profile information holding the details of profile photo, cover photo descriptions
             profileContents = new ObservableCollection<ProfileContent>();
+
+            //Funcction to render the photos to gallery
             PhotoManager.GetPhotosFromAssets(photos);
+
+            //Function to render the Profile Photo, cover Photo and description
             PhotoManager.GetProfile(profileContents);
         }
 
@@ -52,6 +62,7 @@ namespace UWPPhotoLibrary
 
         }
 
+        //Check box click function to add the photo to favourites list
         private void CheckBox_Click(object sender, RoutedEventArgs e)
         {
             var checkBox = sender as CheckBox;
@@ -71,18 +82,22 @@ namespace UWPPhotoLibrary
             }
         }
 
+
+        //Home button for displaying all the available Photos
         private void homebutton_Click(object sender, RoutedEventArgs e)
         {
             PhotoManager.GetPhotosFromAssets(photos);
             PhotoView.ItemsSource = photos;
         }
 
+        //Favorite button for displaying favorite photos
         private void favoritebutton_Click(object sender, RoutedEventArgs e)
         {
             PhotoManager.GetFavoritePhotos(photos, favphotos);
             PhotoView.ItemsSource= favphotos;
         }
 
+        //Function for  unchecking the photo and moving out of the favorite collection
         private void CheckBox_Unchecked(object sender, RoutedEventArgs e)
         {
             var checkBox = sender as CheckBox;
@@ -102,6 +117,7 @@ namespace UWPPhotoLibrary
             }
         }
 
+        //Function for adding a new photo to the gallery
         private async void Add_Photo_Button(object sender, RoutedEventArgs e)
         {
             await PhotoManager.AddPhotos(photos);
@@ -110,15 +126,8 @@ namespace UWPPhotoLibrary
 
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void Close_Click(object sender, RoutedEventArgs e)
-        {
-         
-        }
+   
+        //Function for toggling the pop up to zoomin and zoom out the photo
         private void Image_Tapped(object sender, TappedRoutedEventArgs e)
         {
             var image = (sender as Image);
@@ -137,10 +146,13 @@ namespace UWPPhotoLibrary
             }
         }
 
+        //Function for opening the popup for editing the profile information
         void EditPage_Click(object sender, RoutedEventArgs e)
         {
             if (!MenuPopup.IsOpen) { MenuPopup.IsOpen = true; }
         }
+
+        //Function for updating the photo description
         private async void EditDescription_Click(object sender, RoutedEventArgs e)
         {
             TextBox input = new TextBox()
@@ -163,23 +175,20 @@ namespace UWPPhotoLibrary
                 StorageFolder Profile = await localFolder.CreateFolderAsync("Profile", CreationCollisionOption.OpenIfExists);
                 var descriptionFile = await Profile.CreateFileAsync("description.txt", Windows.Storage.CreationCollisionOption.OpenIfExists);
                 File.WriteAllText(descriptionFile.Path, input.Text);
-                //PhotoManager.GetProfile(profileContents);
-
-                
                 
             }
         }
+
+        //Function for closing the pop up
         private void Submit_Popup(object sender, RoutedEventArgs e)
         {
             if (MenuPopup.IsOpen) { MenuPopup.IsOpen = false; }
-
-            //Debug.WriteLine(profileContents.ToList());
-            //PhotoManager.GetProfile(profileContents);
             ProfileGridView.ItemsSource = profileContents;
             
            
         }
 
+        //Function for updating the coverphoto
         private async void EditCoverButton_Click(object sender, RoutedEventArgs e)
         {
             FileOpenPicker openPicker = new FileOpenPicker();
@@ -188,7 +197,6 @@ namespace UWPPhotoLibrary
             openPicker.FileTypeFilter.Add(".jpg");
             openPicker.FileTypeFilter.Add(".png");
             StorageFile file = await openPicker.PickSingleFileAsync();
-            Debug.WriteLine(file.Name);
             if (file != null)
             {
                 
@@ -197,7 +205,6 @@ namespace UWPPhotoLibrary
                 var image = new BitmapImage();
                 image.SetSource(stream);
                 StorageFolder localFolder = ApplicationData.Current.LocalFolder;
-                //StorageFolder Profile = await localFolder.CreateFolderAsync("Profile", CreationCollisionOption.OpenIfExists);
                 StorageFolder CoverPhotos = await localFolder.CreateFolderAsync("CoverPhotos", CreationCollisionOption.OpenIfExists);
                 string coverFileName = "coverphoto_" + DateTime.Now.ToString("yyyyMMddHHmmss") + ".jpg";
                 await file.CopyAsync(CoverPhotos, coverFileName, NameCollisionOption.ReplaceExisting);
@@ -206,6 +213,8 @@ namespace UWPPhotoLibrary
             }
            
         }
+
+        // Function for updating the profile photo
         private async void EditProfileButton_Click(object sender, RoutedEventArgs e)
         {
             FileOpenPicker openPicker = new FileOpenPicker();
@@ -216,9 +225,7 @@ namespace UWPPhotoLibrary
             StorageFile file = await openPicker.PickSingleFileAsync();
             if (file != null)
             {
-                Debug.WriteLine(file.Name);
                 StorageFolder localFolder = ApplicationData.Current.LocalFolder;
-                //StorageFolder Profile = await localFolder.CreateFolderAsync("Profile", CreationCollisionOption.OpenIfExists);
                 StorageFolder ProfilePhotos = await localFolder.CreateFolderAsync("ProfilePhotos", CreationCollisionOption.OpenIfExists);
                 string profileFileName = "profilephoto_" + DateTime.Now.ToString("yyyyMMddHHmmss") + ".jpg";
                 await file.CopyAsync(ProfilePhotos, profileFileName, NameCollisionOption.ReplaceExisting);
