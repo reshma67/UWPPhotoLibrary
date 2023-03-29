@@ -25,7 +25,7 @@
             </StackPanel>
         </Border>
         <Popup x:Name="photoPopup" IsOpen="False">
-            <Border Background="Black" Margin="250,50,0,0">
+            <Border Background="Black" Margin="250,50,10,0" MaxHeight="600" MaxWidth="800">
                 <Image Source="{Binding ElementName=photoPopup, Path=Tag}" Stretch="Fill"  Tapped="Image_Tapped"/>
             </Border>
         </Popup>
@@ -37,7 +37,7 @@
                         <Button Content="Edit Description" Click="EditDescription_Click" HorizontalAlignment="Center" Margin="10,10,10,10" />
                         <Button Content="Edit Cover Photo" Click="EditCoverButton_Click"  HorizontalAlignment="Center" Margin="10,10,10,10" />
                         <Button Content="Edit Profile Picture" Click="EditProfileButton_Click"  HorizontalAlignment="Center" Margin="10,10,10,10" />
-                        <Button Content="Submit" Click="Submit_Popup" HorizontalAlignment="Center" Margin="10,60,10,18" />
+                        <Button Content="Close" Click="Submit_Popup" HorizontalAlignment="Center" Margin="10,60,10,18" />
                     </StackPanel>
                 </Border>
             </Popup>
@@ -51,23 +51,27 @@
                     <GridView.ItemTemplate>
                         <DataTemplate x:DataType="data:ProfileContent">
                             <Grid>
-                                <Image Name="coverImage" Source="{x:Bind CoverPhoto, FallbackValue=Assets/Images/Cover-Images/paint-smoke.jpg}" Stretch="UniformToFill" />
+                                <Image Name="coverImage" 
+                                       Source="{x:Bind CoverPhoto, FallbackValue=Assets/Images/Cover-Images/paint-smoke.jpg}" 
+                                       MaxWidth="1450"
+                                       MaxHeight="200"
+                                       Stretch="Fill" />
                                 <Ellipse Height="100" 
-                     Width="100" 
-                     Margin="0,-90,0,15">
+                                         Width="100" 
+                                         Margin="0,-30,0,15">
                                     <Ellipse.Fill>
                                         <ImageBrush x:Name="profileImage"
                                 ImageSource="{x:Bind ProfilePhoto, FallbackValue=Assets/Images/Profile-Images/default-profile-image.png}" 
                                 AlignmentX="Center" 
-                                AlignmentY="Center" />
+                                AlignmentY="Top" />
                                     </Ellipse.Fill>
                                 </Ellipse>
                                 <TextBlock Name="profileDescription" Text="{x:Bind Description}"
                                HorizontalAlignment="Center"
-                               VerticalAlignment="Center"
+                               VerticalAlignment="Top"
                                Foreground="White"
                                FontWeight="ExtraBold"
-                               Margin="0, 15, 0, 0"
+                               Margin="0, 115, 0, 0"
                                Padding="10"
                                FontSize="16"/>
                             </Grid>
